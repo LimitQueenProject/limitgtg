@@ -37,6 +37,19 @@ GG="\033[42;1m"
 YG="\033[43;1m"
 BLG="\033[44;1m"
 
+
+updatesc(){
+
+command -v openssl > /dev/null 2>&1 || { echo >&2 " openssl belum terinstall ketik  apt install openssl-tool "; exit 1; }
+command -v curl > /dev/null 2>&1 || { echo >&2 " curl belum terinstall ketik  apt install curl "; exit 1; }
+command -v wget > /dev/null 2>&1 || { echo >&2 " wget belum terinstall ketik  apt install wget "; exit 1; }
+command -v jq > /dev/null 2>&1 || { echo >&2 " jq belum terinstall ketik  apt install jq "; exit 1; }
+
+}
+
+
+
+
 menu(){
 
 banner
@@ -137,6 +150,8 @@ done
 
 
 cek(){
+updatesc
+git pull origin master
 FILE=l/o/g/i/n/login.txt
 if [[ -f "$FILE" ]]; then
 echo -e "${G}FILE DAH DIBUAT TOD"
