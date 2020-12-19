@@ -1,5 +1,4 @@
 #!/bin/bash
-# JANGAN DI RECODE KEMTOT, GUA SUMPAHIN LO MAKIN SOLEH, BERHENTI COMLY XIXIXI
 # IG @royazizbarera
 # coded by: @royazizbarera_900
 # If you use any part from this code, give me the credits, please, read the License
@@ -152,7 +151,11 @@ done
 
 cek(){
 updatesc
-git pull origin master
+echo -e "${G} Cek update an script dulu ya kemtot"
+git pull --ff-only
+sleep 3
+clear
+banner
 FILE=l/o/g/i/n/login.txt
 if [[ -f "$FILE" ]]; then
 echo -e "${G}FILE DAH DIBUAT TOD"
