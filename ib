@@ -50,12 +50,12 @@ echo -ne "${G}[${W}*${G}]${Y}Pilih metode serangan : ${W}" ; read mnu
 if [[ $mnu == 1 ]]; then
 clear
 banner
-hack_followers
+echo -e "${G}Sabar gaess masih di update${W}"
 
 elif [[ $mnu == 2 ]]; then
 clear
 banner
-hack_following
+echo -e "${G}Sabar gaess masih di update${W}"
 
 elif [[ $mnu == 3 ]]; then
 clear
